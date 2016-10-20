@@ -115,11 +115,8 @@ sudo touch /etc/openvpn/log/openvpn-status.log
 
 #### Start server
 ```
-sudo service openvpn start
-```
-Or if openvpn are already started, restart with
-```
-sudo service openvpn restart
+sudo systemctl daemon-reload
+sudo systemctl restart openvpn
 ```
 
 ### Client
@@ -145,11 +142,8 @@ verb 3
 ```
 #### Start client
 ```
-sudo service openvpn start
-```
-Or if openvpn are already started, restart with
-```
-sudo service openvpn restart
+sudo systemctl daemon-reload
+sudo systemctl restart openvpn
 ```
 ## Second test
 You can test ping server from raspberrypi: `ping 10.9.8.1`
@@ -211,6 +205,48 @@ $IPT -t mangle -X
 ```
 
 ## Multiple clients
+## Quick guide to add clients
+Server:
+```
+cd /etc/openvpn/easy-rsa
+sudo ./build-key new_client_name
+sudo tar cvf /new_client_name_keys.tar {keys/ca.crt,keys/new_client_name.crt,keys/new_client_name.key}
+```
+Client:
+```
+sudo apt install openvpn easy-rsa
+sudo mkdir -p /etc/openvpn/easy-rsa
+cd /etc/openvpn/easy-rsa
+sudo scp yourusernameinserver@your_server_ip_or_address:/new_client_name_keys.tar .
+sudo tar xvf new_client_name_keys.tar
+```
+Client /etc/openvpn/client.conf:
+```
+client
+dev tun
+port 1194
+proto udp
+
+remote your_server_ip_or_address 1194
+nobind
+
+ca /etc/openvpn/easy-rsa/keys/ca.crt
+cert /etc/openvpn/easy-rsa/keys/new_client_name.crt
+key /etc/openvpn/easy-rsa/keys/new_client_name.key
+
+comp-lzo
+persist-key
+persist-tun
+
+verb 3
+```
+Start client:
+```
+sudo systemctl daemon-reload
+sudo systemctl restart openvpn
+```
+```
+
 ## Links
 https://wiki.debian.org/OpenVPN
 

@@ -69,7 +69,7 @@ tar cvf /raspberrypi_keys.tar {keys/ca.crt,keys/raspberrypi.crt,keys/raspberrypi
 ```
 #### Start openvpn server for testing
 ```
-openvpn --dev tun1 --ifconfig 10.9.8.1 10.9.8.2 --tls-server --dh /etc/openvpn/easy-rsa/keys/dh2048.pem --ca /etc/openvpn/easy-rsa/keys/ca.crt --cert /etc/openvpn/easy-rsa/keys/server.crt --key /etc/openvpn/easy-rsa/keys/server.key --reneg-sec 60 --verb 5
+openvpn --dev tun1 --ifconfig 10.9.8.1 10.9.8.20 --tls-server --dh /etc/openvpn/easy-rsa/keys/dh2048.pem --ca /etc/openvpn/easy-rsa/keys/ca.crt --cert /etc/openvpn/easy-rsa/keys/server.crt --key /etc/openvpn/easy-rsa/keys/server.key --reneg-sec 60 --verb 5
 ```
 
 ### Client
@@ -83,7 +83,7 @@ sudo tar xvf raspberrypi_keys.tar
 ```
 #### Start openvpn client for testing
 ```
-sudo openvpn --remote your_server_ip_or_address --dev tun1 --ifconfig 10.9.8.2 10.9.8.1 --tls-client --ca /etc/openvpn/easy-rsa/keys/ca.crt --cert /etc/openvpn/easy-rsa/keys/raspberrypi.crt --key /etc/openvpn/easy-rsa/keys/raspberrypi.key --reneg-sec 60 --verb 5
+sudo openvpn --remote your_server_ip_or_address --dev tun1 --ifconfig 10.9.8.20 10.9.8.1 --tls-client --ca /etc/openvpn/easy-rsa/keys/ca.crt --cert /etc/openvpn/easy-rsa/keys/raspberrypi.crt --key /etc/openvpn/easy-rsa/keys/raspberrypi.key --reneg-sec 60 --verb 5
 ```
 ## First test
 If you get in both ends "Initialization Sequence Completed", everything is ok.

@@ -107,7 +107,7 @@ status log/openvpn-status.log
 verb 3
 client-to-client
 ```
-#### Create log directory
+#### Create log file
 ```
 sudo mkdir -p /etc/openvpn/log/
 sudo touch /etc/openvpn/log/openvpn-status.log

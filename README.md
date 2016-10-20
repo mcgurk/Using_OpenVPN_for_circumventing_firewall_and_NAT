@@ -204,6 +204,8 @@ $IPT -t mangle -X
 ```
 
 ## Multiple clients
+When `client-to-client` is defined in server's config, clients see each others. If you want isolate clients leave it away.
+
 ## Quick guide to add client
 Server:
 ```

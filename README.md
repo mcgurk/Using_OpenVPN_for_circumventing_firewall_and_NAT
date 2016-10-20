@@ -5,6 +5,8 @@ In this example, I have Raspberry Pi behind firewall and NAT and I can't/I don't
 
 Connection works automatically even if you restart server or client and connection keeps up when client changes to another network (e.g. from broadband to mobile network).
 
+Even if you can make changes to firewall/NAT-rules, VPN can be handy. You can move Raspberry Pi to any network and it always can be accessed through server. You don't have to do holes to your own router or broadband modem, which would be gone if you have to reset your router to factory settings or if you replace it.
+
 ### Server
 
 Log in as root or give command `sudo su -` or `su -`.

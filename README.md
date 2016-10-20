@@ -92,7 +92,7 @@ If you get in both ends "Initialization Sequence Completed", everything is ok.
 You can test ping server from raspberrypi: `ping 10.9.8.1`
 and ping raspberrypi from server: `ping 10.9.8.20`
 
-## Making permanent
+## Making VPN permanent
 ### Server
 #### /etc/openvpn/server.conf
 ```

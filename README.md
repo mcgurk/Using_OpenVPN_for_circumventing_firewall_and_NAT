@@ -97,6 +97,7 @@ dh      /etc/openvpn/easy-rsa/keys/dh2048.pem
 
 server 10.9.8.0 255.255.255.0
 ifconfig-pool-persist ipp.txt
+client-config-dir /etc/openvpn/ccd
 
 keepalive 10 120
 

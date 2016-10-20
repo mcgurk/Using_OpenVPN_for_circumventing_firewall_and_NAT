@@ -75,7 +75,7 @@ sudo openvpn --remote your_server_ip_or_address --dev tun1 --ifconfig 10.9.8.2 1
 ```
 ## First test
 If you get in both ends "Initialization Sequence Completed", everything is ok.
-you can test ping server from raspberrypi: `ping 10.9.8.1`
+You can test ping server from raspberrypi: `ping 10.9.8.1`
 and ping raspberrypi from server: `ping 10.9.8.2`
 
 ## Making permanent
@@ -149,7 +149,64 @@ Or if openvpn are already started, restart with
 ```
 sudo service openvpn restart
 ```
+## Second test
+You can test ping server from raspberrypi: `ping 10.9.8.1`
+and ping raspberrypi from server: `ping 10.9.8.2`
 ## Making redirections
+Add this to /etc/rc.local
+```
+sysctl -w net.ipv4.ip_forward=1
+```
+Add also redirections.
+### Examples
+#### One port from public network to VPN-client (same port in server and client)
+```
+# raspberrypi, node-red
+iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 1880 -j DNAT --to-dest 10.9.8.6:1880
+iptables -t nat -A POSTROUTING -d 10.9.8.6 -p tcp --dport 1880 -j SNAT --to-source 10.9.8.1
+```
+#### One port from public network to VPN-client (different port in server than in client)
+```
+# raspberrypi, ssh accessible from server port 2222
+iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 2222 -j DNAT --to-dest 10.9.8.6:22
+iptables -t nat -A POSTROUTING -d 10.9.8.6 -p tcp --dport 22 -j SNAT --to-source 10.8.0.1
+```
+#### All traffic from public network to VPN-client (Be carefull! if you redirect your prime ip, you cannot ssh any more to server)
+```
+#raspberrypi, all, server have extra ip
+iptables -t nat -A PREROUTING -d x.x.x.x -p tcp -j DNAT --to-dest 10.9.8.6
+iptables -t nat -A POSTROUTING -d 10.9.8.6 -p tcp -j SNAT --to-source 10.9.8.1
+```
+## Flush
+When you test different iptables rules, flush rules between tests.
+/usr/local/bin/flush:
+```
+echo "Flushing Tables ..."
+
+IPT="/sbin/iptables"
+
+# Reset Default Policies
+$IPT -P INPUT ACCEPT
+$IPT -P FORWARD ACCEPT
+$IPT -P OUTPUT ACCEPT
+$IPT -t nat -P PREROUTING ACCEPT
+$IPT -t nat -P POSTROUTING ACCEPT
+$IPT -t nat -P OUTPUT ACCEPT
+$IPT -t mangle -P PREROUTING ACCEPT
+$IPT -t mangle -P OUTPUT ACCEPT
+
+# Flush all rules
+$IPT -F
+$IPT -t nat -F
+$IPT -t mangle -F
+
+# Erase all non-default chains
+$IPT -X
+$IPT -t nat -X
+$IPT -t mangle -X
+```
+
+## Multiple clients
 ## Links
 https://wiki.debian.org/OpenVPN
 

@@ -3,7 +3,7 @@
 ##  Introduction
 In this example, we have Raspberry Pi behind firewall and NAT and we can't/we don't have priviledges to change firewall/NAT-rules. Even so, we want to expose some Raspberry Pi services to Internet. We have server (cloudatcost) with Debian, which are exposed to Internet. We use OpenVPN to connect Raspberry Pi to server and redirect some server traffic to Raspberry Pi. Server could be also just another computer like Raspberry Pi at some place where you can open ports/traffic to Internet.
 
-Conection works automatically even if you restart server or client and connection keeps up when client changes to another network (e.g. from broadband to mobile network).
+Connection works automatically even if you restart server or client and connection keeps up when client changes to another network (e.g. from broadband to mobile network).
 
 ### Server
 

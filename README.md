@@ -220,11 +220,12 @@ $IPT -t mangle -X
 When `client-to-client` is defined in server's config, clients see each others (e.g. you can ping 10.9.8.20 from another client). If you want isolate clients leave it out.
 
 ## Quick guide to add client
-Server:
+Server (log as root):
 ```
 cd /etc/openvpn/easy-rsa
-sudo ./build-key new_client_name
-sudo tar cvf /new_client_name_keys.tar {keys/ca.crt,keys/new_client_name.crt,keys/new_client_name.key}
+. ./vars
+./build-key new_client_name
+tar cvf /new_client_name_keys.tar {keys/ca.crt,keys/new_client_name.crt,keys/new_client_name.key}
 echo ifconfig-push 10.9.8.x 10.9.8.1 > /etc/openvpn/ccd/new_client_name
 echo 10.9.8.x new_client_name >> /etc/hosts
 ```

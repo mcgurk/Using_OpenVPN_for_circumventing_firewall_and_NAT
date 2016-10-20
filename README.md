@@ -15,7 +15,7 @@ mkdir -p /etc/openvpn/easy-rsa
 cp -R /usr/share/easy-rsa/* easy-rsa/
 cd /etc/openvpn/easy-rsa
 ```
-edit /etc/openvpn/easy-rsa/vars with your own stuff:
+edit `/etc/openvpn/easy-rsa/vars` with your own stuff if you want:
 ```
 export KEY_COUNTRY="US"
 export KEY_PROVINCE="CA"

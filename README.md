@@ -88,7 +88,7 @@ sudo openvpn --remote your_server_ip_or_address --dev tun1 --ifconfig 10.9.8.2 1
 ## First test
 If you get in both ends "Initialization Sequence Completed", everything is ok.
 You can test ping server from raspberrypi: `ping 10.9.8.1`
-and ping raspberrypi from server: `ping 10.9.8.2`
+and ping raspberrypi from server: `ping 10.9.8.20`
 
 ## Making permanent
 ### Server

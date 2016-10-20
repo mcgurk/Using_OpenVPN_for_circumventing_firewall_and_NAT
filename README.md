@@ -1,7 +1,7 @@
 # Using OpenVPN for circumventing firewall and NAT when you want to make server accessible from Internet
 
 ##  Introduction
-In this example, we have Raspberry Pi behind firewall and NAT and we can't/we don't have priviledges to change firewall/NAT-rules. Even so, we want to expose some Raspberry Pi services to Internet. I have server (cloudatcost) with Debian, which are exposed to Internet. We use OpenVPN to connect Raspberry Pi to server and redirect some server traffic to Raspberry Pi. Server could be also just another computer like Raspberry Pi at some place where you can open ports/traffic to Internet.
+In this example, I have Raspberry Pi behind firewall and NAT and we can't/we don't have priviledges to change firewall/NAT-rules. Even so, I want to expose some Raspberry Pi services to Internet. I have server (cloudatcost) with Debian, which are exposed to Internet. I use OpenVPN to connect Raspberry Pi to server and redirect some server traffic to Raspberry Pi. Server could be also just another computer like Raspberry Pi at some place where you can open ports/traffic to Internet.
 
 Connection works automatically even if you restart server or client and connection keeps up when client changes to another network (e.g. from broadband to mobile network).
 

@@ -152,6 +152,8 @@ sudo service openvpn restart
 ## Second test
 You can test ping server from raspberrypi: `ping 10.9.8.1`
 and ping raspberrypi from server: `ping 10.9.8.2`
+If ping works, one big milestone is achieved - you can ssh to server and ssh from there to your client!
+
 ## Making redirections
 Add this to /etc/rc.local
 ```

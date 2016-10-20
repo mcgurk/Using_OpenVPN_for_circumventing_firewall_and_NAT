@@ -14,14 +14,18 @@ apt install openvpn easy-rsa
 mkdir -p /etc/openvpn/easy-rsa
 cp -R /usr/share/easy-rsa/* easy-rsa/
 cd /etc/openvpn/easy-rsa
-edit /etc/openvpn/easy-rsa/vars:
+```
+edit /etc/openvpn/easy-rsa/vars with your own stuff:
+```
 export KEY_COUNTRY="US"
 export KEY_PROVINCE="CA"
 export KEY_CITY="SanFrancisco"
 export KEY_ORG="Fort-Funston"
 export KEY_EMAIL="mail@domain"
 export KEY_EMAIL=mail@domain
+```
 
+```
 mkdir keys
 touch keys/index.txt
 echo 01 > keys/serial
@@ -47,7 +51,7 @@ You can aswer just with enter every question but two last you have to give y.
 If you want password for client (if you want to connect automatically to server, don't do this):
 `./build-key-pass raspberrypi`
 
-### Tar keys and certificates so you can copy them as normal user (root-login may be disabled in ssh)
+### Tar keys and certificates so you can get them from client as normal user (root-login may be disabled in ssh)
 ```
 tar cvf /raspberrypi_keys.tar {keys/ca.crt,keys/raspberrypi.crt,keys/raspberrypi.key}
 ```

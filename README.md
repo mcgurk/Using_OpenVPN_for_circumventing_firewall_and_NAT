@@ -55,6 +55,14 @@ You can aswer just with enter every question but two last you have to give y.
 If you want password for client (if you want to connect automatically to server, don't do this):
 `./build-key-pass raspberrypi`
 
+#### Assign permanent ip for client and add it to hosts
+We need pemanent ip for client so we can make iptable-rules for redirecting later.
+```
+mkdir -p /etc/openvpn/ccd
+echo ifconfig-push 10.9.8.20 10.9.8.1 > /etc/openvpn/ccd/raspberrypi
+echo 10.9.8.20 raspberrypi >> /etc/hosts
+```
+
 #### Tar keys and certificates so you can get them with client as normal user (root-login may be disabled in ssh)
 ```
 tar cvf /raspberrypi_keys.tar {keys/ca.crt,keys/raspberrypi.crt,keys/raspberrypi.key}
@@ -162,20 +170,20 @@ Add also redirections.
 #### One port from public network to VPN-client (same port in server and client)
 ```
 # raspberrypi, node-red
-iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 1880 -j DNAT --to-dest 10.9.8.6:1880
-iptables -t nat -A POSTROUTING -d 10.9.8.6 -p tcp --dport 1880 -j SNAT --to-source 10.9.8.1
+iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 1880 -j DNAT --to-dest 10.9.8.20:1880
+iptables -t nat -A POSTROUTING -d 10.9.8.20 -p tcp --dport 1880 -j SNAT --to-source 10.9.8.1
 ```
 #### One port from public network to VPN-client (different port in server than in client)
 ```
 # raspberrypi, ssh accessible from server port 2222
-iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 2222 -j DNAT --to-dest 10.9.8.6:22
-iptables -t nat -A POSTROUTING -d 10.9.8.6 -p tcp --dport 22 -j SNAT --to-source 10.8.0.1
+iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 2222 -j DNAT --to-dest 10.9.8.20:22
+iptables -t nat -A POSTROUTING -d 10.9.8.20 -p tcp --dport 22 -j SNAT --to-source 10.8.0.1
 ```
 #### All traffic from public network to VPN-client (Be carefull! if you redirect your prime ip, you cannot ssh any more to server)
 ```
 #raspberrypi, all, server have extra ip x.x.x.x
-iptables -t nat -A PREROUTING -d x.x.x.x -p tcp -j DNAT --to-dest 10.9.8.6
-iptables -t nat -A POSTROUTING -d 10.9.8.6 -p tcp -j SNAT --to-source 10.9.8.1
+iptables -t nat -A PREROUTING -d x.x.x.x -p tcp -j DNAT --to-dest 10.9.8.20
+iptables -t nat -A POSTROUTING -d 10.9.8.20 -p tcp -j SNAT --to-source 10.9.8.1
 ```
 ## Flush
 When you test different iptables rules, flush rules between tests.

@@ -53,7 +53,7 @@ You can aswer just with enter every question but two last you have to give y.
 If you want password for client (if you want to connect automatically to server, don't do this):
 `./build-key-pass raspberrypi`
 
-#### Tar keys and certificates so you can get them from client as normal user (root-login may be disabled in ssh)
+#### Tar keys and certificates so you can get them with client as normal user (root-login may be disabled in ssh)
 ```
 tar cvf /raspberrypi_keys.tar {keys/ca.crt,keys/raspberrypi.crt,keys/raspberrypi.key}
 ```

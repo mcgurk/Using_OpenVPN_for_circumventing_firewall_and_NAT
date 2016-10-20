@@ -245,7 +245,6 @@ Start client:
 sudo systemctl daemon-reload
 sudo systemctl restart openvpn
 ```
-```
 
 ## Links
 https://wiki.debian.org/OpenVPN

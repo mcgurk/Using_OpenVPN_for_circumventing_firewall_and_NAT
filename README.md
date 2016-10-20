@@ -205,7 +205,7 @@ $IPT -t mangle -X
 ```
 
 ## Multiple clients
-## Quick guide to add clients
+## Quick guide to add client
 Server:
 ```
 cd /etc/openvpn/easy-rsa

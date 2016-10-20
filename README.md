@@ -179,7 +179,7 @@ iptables -t nat -A POSTROUTING -d 10.9.8.20 -p tcp --dport 1880 -j SNAT --to-sou
 iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 2222 -j DNAT --to-dest 10.9.8.20:22
 iptables -t nat -A POSTROUTING -d 10.9.8.20 -p tcp --dport 22 -j SNAT --to-source 10.8.0.1
 ```
-#### All traffic from public network to VPN-client (Be carefull! if you redirect your prime ip, you cannot ssh any more to server)
+#### All traffic from public network to VPN-client (Be carefull! if you redirect your prime ip, you cannot any more directly ssh to server)
 ```
 #raspberrypi, all, server have extra ip x.x.x.x
 iptables -t nat -A PREROUTING -d x.x.x.x -p tcp -j DNAT --to-dest 10.9.8.20

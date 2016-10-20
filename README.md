@@ -158,7 +158,7 @@ Add this to /etc/rc.local
 sysctl -w net.ipv4.ip_forward=1
 ```
 Add also redirections.
-### Examples
+### Redirection examples
 #### One port from public network to VPN-client (same port in server and client)
 ```
 # raspberrypi, node-red

@@ -3,7 +3,7 @@
 
 ## Server
 
-log in as root or give command `sudo su -`
+Log in as root or give command `sudo su -`
 
 ### Install openvpn and easy-rsa
 ```

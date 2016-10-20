@@ -56,9 +56,9 @@ If you want password for client (if you want to connect automatically to server,
 `./build-key-pass raspberrypi`
 
 #### Assign permanent ip for client and add it to hosts
-We need pemanent ip for client so we can make iptable-rules for redirecting later.
+We need pemanent ip for client so we can make iptable-rules for redirecting later. Additionally we add ip and name to hosts-file, so we can later use name raspberrypi instead of 10.9.8.20.
 ```
-mkdir -p /etc/openvpn/ccd
+mkdir /etc/openvpn/ccd
 echo ifconfig-push 10.9.8.20 10.9.8.1 > /etc/openvpn/ccd/raspberrypi
 echo 10.9.8.20 raspberrypi >> /etc/hosts
 ```
@@ -76,7 +76,7 @@ openvpn --dev tun1 --ifconfig 10.9.8.1 10.9.8.2 --tls-server --dh /etc/openvpn/e
 #### Install programs and get client keys and certificates
 ```
 sudo apt install openvpn easy-rsa
-sudo mkdir -p /etc/openvpn/easy-rsa
+sudo mkdir /etc/openvpn/easy-rsa
 cd /etc/openvpn/easy-rsa
 sudo scp yourusernameinserver@your_server_ip_or_address:/raspberrypi_keys.tar .
 sudo tar xvf raspberrypi_keys.tar
@@ -120,7 +120,7 @@ client-to-client
 ```
 #### Create log file
 ```
-sudo mkdir -p /etc/openvpn/log/
+sudo mkdir /etc/openvpn/log/
 sudo touch /etc/openvpn/log/openvpn-status.log
 ```
 
@@ -223,6 +223,8 @@ Server:
 cd /etc/openvpn/easy-rsa
 sudo ./build-key new_client_name
 sudo tar cvf /new_client_name_keys.tar {keys/ca.crt,keys/new_client_name.crt,keys/new_client_name.key}
+echo ifconfig-push 10.9.8.x 10.9.8.1 > /etc/openvpn/ccd/new_client_name
+echo 10.9.8.x new_client_name >> /etc/hosts
 ```
 Client:
 ```
